@@ -231,10 +231,16 @@
 			</xsl:for-each>
 	
 			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
+			<!-- Index distinct organisation names                                 -->
+			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
+			
+			<xsl:for-each-group select="gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString" group-by=".">
+				<Field name="orgName" string="{string(current-grouping-key())}" store="true" index="true"/>
+			</xsl:for-each-group>
+			
+			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
 	
 			<xsl:for-each select="gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString">
-				<Field name="orgName" string="{string(.)}" store="true" index="true"/>
-
 				<xsl:variable name="role" select="../../gmd:role/*/@codeListValue"/>
 				<xsl:variable name="logo" select="../..//gmx:FileName/@src"/>
 
