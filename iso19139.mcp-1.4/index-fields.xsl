@@ -351,6 +351,7 @@
 				<!-- ignore empty downloads -->
 				<xsl:if test="string($linkage)!='' and not(contains($linkage,$download_check))">  
 					<Field name="protocol" string="{string($protocol)}" store="false" index="true"/>
+			   	 	<Field name="serverUrl" string="{$linkage}" store="false" index="true"/>
 				</xsl:if>  
 
 				<xsl:if test="normalize-space($mimetype)!=''">
