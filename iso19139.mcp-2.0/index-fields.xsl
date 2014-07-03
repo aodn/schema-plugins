@@ -9,6 +9,7 @@
 	xmlns:mcp="http://schemas.aodn.org.au/mcp-2.0"
 	xmlns:dwc="http://rs.tdwg.org/dwc/terms/"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:java="java:org.fao.geonet.util.XslUtil"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:param name="datadir"/>
@@ -172,6 +173,14 @@
 					<Field name="geoDescCode" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 
+				<xsl:for-each select="gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon">
+					<xsl:variable name="wktCoords">
+						<xsl:apply-templates mode="gml" select="*"/>
+					</xsl:variable>
+					<xsl:variable name="geom">POLYGON(<xsl:value-of select="java:replace(string($wktCoords), '\),$', ')')"/>)</xsl:variable>
+					<Field name="geoPolygon" string="{string($geom)}" store="true" index="false"/>
+				</xsl:for-each>>
+				
 				<xsl:for-each select="gmd:geographicElement/gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:RS_Identifier">
 					<xsl:if test="gmd:authority/*/gmd:title/gco:CharacterString='c-squares'">
 						<xsl:for-each select="tokenize(gmd:code/gco:CharacterString,'\|')">
@@ -593,5 +602,22 @@
 	</xsl:template>
 
 	<!-- ========================================================================================= -->
+	<!-- gml mode - convert gml polygons into WKT -->
+
+	<xsl:template mode="gml" match="gml:coordinates">
+		<xsl:variable name="ts" select="string(@ts)"/>
+		<xsl:variable name="cs" select="string(@cs)"/>
+		<xsl:text>(</xsl:text>
+		<xsl:value-of select="java:takeUntil(java:toWktCoords(string(.),$ts,$cs), ';\Z')"/>
+		<xsl:text>),</xsl:text>
+	</xsl:template>
+
+	<xsl:template mode="gml" match="gml:posList">
+		<xsl:text>(</xsl:text>
+		<xsl:value-of select="java:takeUntil(java:posListToWktCoords(string(.), string(@dimension)), ';\Z')"/>
+		<xsl:text>),</xsl:text>
+	</xsl:template>
+
+	<xsl:template mode="gml" match="text()"/>
 
 </xsl:stylesheet>
