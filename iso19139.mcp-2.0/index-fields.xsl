@@ -10,7 +10,10 @@
 	xmlns:dwc="http://rs.tdwg.org/dwc/terms/"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:java="java:org.fao.geonet.util.XslUtil"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	xmlns:converter="java:org.fao.geonet.util.GmlWktConverter"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:saxon="http://saxon.sf.net/"
+	extension-element-prefixes="saxon">
 
 	<xsl:param name="datadir"/>
 
@@ -29,6 +32,8 @@
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" />
 
 	<!-- ========================================================================================= -->
+
+	<xsl:output name="serialisation-output-format" method="xml" omit-xml-declaration="yes"/>
 
 	<xsl:template match="/">
 		<xsl:variable name="isoLangId">
@@ -176,11 +181,8 @@
 				</xsl:for-each>
 
 				<xsl:for-each select="gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon">
-					<xsl:variable name="wktCoords">
-						<xsl:apply-templates mode="gml" select="*"/>
-					</xsl:variable>
-					<xsl:variable name="geom">POLYGON(<xsl:value-of select="java:replace(string($wktCoords), '\),$', ')')"/>)</xsl:variable>
-					<Field name="geoPolygon" string="{string($geom)}" store="true" index="false"/>
+					<xsl:variable name="gml" select="saxon:serialize(., 'serialisation-output-format')"/>
+					<Field name="geoPolygon" string="{converter:gmlToWkt($gml)}" store="true" index="false"/>
 				</xsl:for-each>>
 				
 				<xsl:for-each select="gmd:geographicElement/gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:RS_Identifier">
@@ -602,24 +604,5 @@
 	<xsl:template match="*" mode="codeList">
 		<xsl:apply-templates select="*" mode="codeList"/>
 	</xsl:template>
-
-	<!-- ========================================================================================= -->
-	<!-- gml mode - convert gml polygons into WKT -->
-
-	<xsl:template mode="gml" match="gml:coordinates">
-		<xsl:variable name="ts" select="string(@ts)"/>
-		<xsl:variable name="cs" select="string(@cs)"/>
-		<xsl:text>(</xsl:text>
-		<xsl:value-of select="java:takeUntil(java:toWktCoords(string(.),$ts,$cs), ';\Z')"/>
-		<xsl:text>),</xsl:text>
-	</xsl:template>
-
-	<xsl:template mode="gml" match="gml:posList">
-		<xsl:text>(</xsl:text>
-		<xsl:value-of select="java:takeUntil(java:posListToWktCoords(string(.), string(@dimension)), ';\Z')"/>
-		<xsl:text>),</xsl:text>
-	</xsl:template>
-
-	<xsl:template mode="gml" match="text()"/>
 
 </xsl:stylesheet>
