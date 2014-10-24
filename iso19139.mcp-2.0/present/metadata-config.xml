@@ -8,7 +8,7 @@
     <!-- Each configured term will have a term picker provided and will only be able to       -->
     <!-- be modified using the picker                                                         -->
         <element name="mcp:parameterName">
-            <thesaurus>register.discipline.16a5b7ad-7c1e-4ede-b8d5-c5487b7e57d4</thesaurus>
+            <thesaurus>external.theme.parameterClassificationScheme</thesaurus>
             <typeCode>longName</typeCode>
         </element>
         <element name="mcp:parameterUnits">
@@ -24,7 +24,7 @@
             <typeCode>longName</typeCode>
         </element>
         <element name="mcp:platform">
-            <thesaurus>register.discipline.43041df9-32f9-4176-b364-25c2b28c9bf1</thesaurus>
+            <thesaurus>external.theme.platformClassificationScheme</thesaurus>
             <typeCode>longName</typeCode>
         </element>
     </termSelector>
