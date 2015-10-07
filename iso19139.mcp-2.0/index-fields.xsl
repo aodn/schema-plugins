@@ -322,11 +322,26 @@
 				<xsl:for-each select="//gmd:accessConstraints/gmd:MD_RestrictionCode/@codeListValue">
 					<Field name="accessConstr" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
+                <xsl:for-each select="//mcp:attributionConstraints/gco:CharacterString">
+                  <Field name="attrConstr" string="{string(.)}" store="true" index="true" />
+                </xsl:for-each>
 				<xsl:for-each select="//gmd:otherConstraints/gco:CharacterString">
 					<Field name="otherConstr" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="//gmd:classification/gmd:MD_ClassificationCode/@codeListValue">
 					<Field name="classif" string="{string(.)}" store="true" index="true"/>
+				</xsl:for-each>
+                <xsl:for-each select="//mcp:jurisdictionLink/gmd:URL">
+                  <Field name="jurisdictionLink" string="{string(.)}" store="true" index="true" />
+                </xsl:for-each>
+                <xsl:for-each select="//mcp:licenseName/gco:CharacterString">
+                  <Field name="licenseName" string="{string(.)}" store="true" index="true" />
+                </xsl:for-each>
+                <xsl:for-each select="//mcp:licenseLink/gmd:URL">
+                  <Field name="licenseLink" string="{string(.)}" store="true" index="true" />
+                </xsl:for-each>
+				<xsl:for-each select="//gmd:otherCitationDetails/gco:CharacterString">
+					<Field name="otherCitation" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="//gmd:useLimitation/gco:CharacterString">
 					<Field name="conditionApplyingToAccessAndUse" string="{string(.)}" store="true" index="true"/>
