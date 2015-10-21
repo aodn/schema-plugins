@@ -193,8 +193,8 @@
 					</xsl:if>
 				</xsl:for-each>
 
-				<xsl:for-each select="gmd:temporalElement/mcp:EX_TemporalExtent/gmd:extent|gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent">
-					<xsl:for-each select="gml:TimePeriod">
+				<xsl:for-each select="gmd:temporalElement/mcp:EX_TemporalExtent|gmd:temporalElement/gmd:EX_TemporalExtent">
+					<xsl:for-each select="gmd:extent/gml:TimePeriod">
 						<xsl:variable name="times">
 							<xsl:call-template name="newGmlTime">
 								<xsl:with-param name="begin" select="gml:beginPosition|gml:begin/gml:TimeInstant/gml:timePosition"/>
@@ -204,6 +204,10 @@
 
 						<Field name="tempExtentBegin" string="{lower-case(substring-before($times,'|'))}" store="true" index="true"/>
 						<Field name="tempExtentEnd" string="{lower-case(substring-after($times,'|'))}" store="true" index="true"/>
+					</xsl:for-each>
+
+					<xsl:for-each select="*/mcp:MD_TemporalAggregationUnitCode/@codeListValue">
+						<Field name="temporalAggregation" string="{.}" store="false" index="true"/>
 					</xsl:for-each>
 				</xsl:for-each>
 
