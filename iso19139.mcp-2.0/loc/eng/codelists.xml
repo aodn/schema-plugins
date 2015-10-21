@@ -496,13 +496,13 @@
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
-			<code>three-days</code>
+			<code>threeDays</code>
 			<label>Three days</label>
 			<description>Aggregation unit is three days</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
-			<code>six-days</code>
+			<code>sixDays</code>
 			<label>Six days</label>
 			<description>Aggregation unit is six days</description>
 		</entry>
