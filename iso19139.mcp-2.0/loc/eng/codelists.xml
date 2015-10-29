@@ -496,15 +496,15 @@
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
-			<code>threeDays</code>
-			<label>Three days</label>
-			<description>Aggregation unit is three days</description>
+			<code>three-day</code>
+			<label>Three day</label>
+			<description>Aggregation unit is three-day</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
-			<code>sixDays</code>
-			<label>Six days</label>
-			<description>Aggregation unit is six days</description>
+			<code>six-day</code>
+			<label>Six day</label>
+			<description>Aggregation unit is six-day</description>
 		</entry>
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<entry>
