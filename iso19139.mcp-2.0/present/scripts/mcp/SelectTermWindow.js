@@ -225,7 +225,7 @@ Mcp.SelectTermWindow = Ext.extend(Ext.Window, {
               '</mcp:type>', 
               '<mcp:usedInDataset>',
                 '<gco:Boolean>',
-                  '"{usedInDataset}"',
+                  '{usedInDataset}',
                 '</gco:Boolean>',
               '</mcp:usedInDataset>',
 
