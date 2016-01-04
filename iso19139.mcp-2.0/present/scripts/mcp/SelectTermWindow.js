@@ -212,6 +212,7 @@ Mcp.SelectTermWindow = Ext.extend(Ext.Window, {
         // what the hell is this editing,
 
         var xmlFragmentTpl = new Ext.XTemplate(
+
             '<tpl if="action==\'add\'">',
               '<{name} xmlns:mcp="http://schemas.aodn.org.au/mcp-2.0">',
             '</tpl>',
