@@ -142,11 +142,10 @@
 					<Field name="dataparam" string="{$term}" store="true" index="true"/>
 					<xsl:if test="mcp:type/mcp:DP_TypeCode/@codeListValue='longName'">
 						<Field name="longParamName" string="{$term}" store="true" index="true"/>
-						<Field name="parameterUri" string="{.//mcp:vocabularyTermURL/gmd:URL[1]}" store="true" index="true"/>
+						<Field name="parameterUri" string="{mcp:vocabularyTermURL/gmd:URL}" store="true" index="true"/>
 					</xsl:if>
 					<xsl:for-each select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship">
 						<Field name="vocabTerm" string="{mcp:vocabularyTermURL/gmd:URL}" store="true" index="true"/>
-						<Field name="vocabTermList" string="{mcp:vocabularyListURL/gmd:URL}" store="true" index="true"/>
 					</xsl:for-each>
 				</xsl:for-each>
 			</xsl:for-each>
@@ -157,7 +156,7 @@
 
 			<xsl:for-each-group select="mcp:dataParameters/mcp:DP_DataParameters/mcp:dataParameter/mcp:DP_DataParameter/mcp:platform" group-by="mcp:DP_Term/mcp:term/gco:CharacterString">
 				<Field name="platform" string="{current-grouping-key()}" store="true" index="true"/>
-				<Field name="platformUri" string="{current-group()[1]//mcp:vocabularyTermURL/gmd:URL[1]}" store="true" index="true"/>
+				<Field name="platformUri" string="{current-group()[1]/mcp:DP_Term/mcp:vocabularyTermURL/gmd:URL}" store="true" index="true"/>
 			</xsl:for-each-group>
 
 			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
