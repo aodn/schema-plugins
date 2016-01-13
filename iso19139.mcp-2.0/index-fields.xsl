@@ -264,6 +264,7 @@
 
 			<xsl:for-each-group select="$pointOfContactOrganisations|$responsiblePartyOrganisations" group-by=".">
 				<Field name="orgName" string="{string(current-grouping-key())}" store="true" index="true"/>
+				<Field name="organisation" string="{string(current-grouping-key())}" store="true" index="true"/>
 			</xsl:for-each-group>
 
 			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
