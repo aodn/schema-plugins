@@ -33,11 +33,15 @@
       <xsl:choose>
         <!-- controlled term -->
         <xsl:when test="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:relationshipType/mcp:DP_RelationshipTypeCode">
-        <mcp:vocabularyTermURL>
-          <gmd:URL>
-            <xsl:copy-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL/text()"/>
-          </gmd:URL>
-        </mcp:vocabularyTermURL>
+          <mcp:vocabularyTermURL>
+            <gmd:URL>
+              <xsl:copy-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL/text()"/>
+            </gmd:URL>
+          </mcp:vocabularyTermURL>
+        </xsl:when>
+        <!-- make idempotent if already updated -->
+        <xsl:when test="mcp:vocabularyTermURL">
+          <xsl:copy-of select="mcp:vocabularyTermURL"/>
         </xsl:when>
         <xsl:otherwise>
         </xsl:otherwise>
