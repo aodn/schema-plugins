@@ -329,7 +329,7 @@
 				<xsl:for-each select="*/mcp:attributionConstraints/gco:CharacterString">
 					<Field name="attrConstr" string="{string(.)}" store="true" index="true" />
 				</xsl:for-each>
-				<xsl:for-each select="*/gmd:otherConstraints/gco:CharacterString">
+				<xsl:for-each select="*/gmd:otherConstraints/gco:CharacterString|*/mcp:otherConstraints/gco:CharacterString">
 					<Field name="otherConstr" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="*/gmd:classification/gmd:MD_ClassificationCode/@codeListValue">
