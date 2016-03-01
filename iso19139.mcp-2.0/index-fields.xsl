@@ -344,6 +344,9 @@
 				<xsl:for-each select="*/mcp:licenseLink/gmd:URL">
 					<Field name="licenseLink" string="{string(.)}" store="true" index="true" />
 				</xsl:for-each>
+				<xsl:for-each select="*/mcp:imageLink/gmd:URL">
+					<Field name="imageLink" string="{string(.)}" store="true" index="true" />
+				</xsl:for-each>
 				<xsl:for-each select="*/gmd:otherCitationDetails/gco:CharacterString">
 					<Field name="otherCitation" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
