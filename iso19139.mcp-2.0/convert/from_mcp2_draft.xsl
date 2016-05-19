@@ -11,8 +11,9 @@
   exclude-result-prefixes="xsl mcp gco gmd gmx geonet"
 >
 
-  <xsl:template match="mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification/mcp:dataParameters/mcp:DP_DataParameters/mcp:dataParameter/mcp:DP_DataParameter/*/mcp:DP_Term">
+  <xsl:output indent="yes"/>
 
+  <xsl:template match="mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification/mcp:dataParameters/mcp:DP_DataParameters/mcp:dataParameter/mcp:DP_DataParameter/*/mcp:DP_Term">
     <mcp:DP_Term>
 
       <!-- common for both controlled and uncontrolled -->
@@ -38,6 +39,13 @@
               <xsl:copy-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyTermURL/gmd:URL/text()"/>
             </gmd:URL>
           </mcp:vocabularyTermURL>
+          <xsl:if test="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyListURL">
+            <mcp:vocabularyServiceURL>
+              <gmd:URL>
+                <xsl:copy-of select="mcp:vocabularyRelationship/mcp:DP_VocabularyRelationship/mcp:vocabularyListURL/gmd:URL/text()"/>
+              </gmd:URL>
+            </mcp:vocabularyServiceURL>
+          </xsl:if>
         </xsl:when>
         <!-- make idempotent if already updated -->
         <xsl:when test="mcp:vocabularyTermURL">
