@@ -351,7 +351,7 @@
 					<Field name="otherCitation" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 				<xsl:for-each select="*/gmd:useLimitation/gco:CharacterString">
-					<Field name="conditionApplyingToAccessAndUse" string="{string(.)}" store="true" index="true"/>
+					<Field name="useLimitation" string="{string(.)}" store="true" index="true"/>
 				</xsl:for-each>
 			</xsl:for-each>
 
