@@ -484,6 +484,12 @@
 			</xsl:for-each>  
 		</xsl:for-each>
 
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
+		<!-- === Point of truth === -->		
+		<xsl:for-each select="gmd:distributionInfo//gmd:CI_OnlineResource[starts-with(gmd:protocol/gco:CharacterString,'WWW:LINK-') and contains(gmd:protocol/gco:CharacterString,'metadata-URL')]/gmd:linkage/gmd:URL">
+			<Field  name="pointOfTruth" string="{string(.)}" store="false" index="true"/>
+		</xsl:for-each>
+
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- === Content info === -->
 		<xsl:for-each select="gmd:contentInfo/*/gmd:featureCatalogueCitation[@uuidref]">
