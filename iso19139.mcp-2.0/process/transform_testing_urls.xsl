@@ -10,7 +10,6 @@
     <xsl:variable name="urlSubstitutions">
         <substitution match="https?://geoserver-123.aodn.org.au(:443)?" replaceWith="http://geoserver-systest.aodn.org.au"/>
         <substitution match="https?://geoserver-wps.aodn.org.au(:443)?" replaceWith="http://geoserver-wps-systest.aodn.org.au"/>
-        <substitution match="https?://catalogue-imos.aodn.org.au(:443)?" replaceWith="http://catalogue-systest.aodn.org.au"/>
         <substitution match="https?://thredds.aodn.org.au(:443)?" replaceWith="http://thredds-systest.aodn.org.au"/>
     </xsl:variable>
 
@@ -22,6 +21,12 @@
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
+    </xsl:template>
+
+    <!-- Convert point of truth links only to avoid accidental edits -->
+
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='WWW:LINK-1.0-http--metadata-URL']">
+        <gmd:URL><xsl:value-of select="replace(.,'catalogue-imos', 'catalogue-systest')"/></gmd:URL>
     </xsl:template>
 
     <!-- substitute production service endpoints with systest service endpoints -->
