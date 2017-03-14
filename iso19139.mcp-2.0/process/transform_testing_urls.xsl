@@ -1,10 +1,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:gco="http://www.isotc211.org/2005/gco"
-    xmlns:gmd="http://www.isotc211.org/2005/gmd"
-    xmlns:mcp="http://bluenet3.antcrc.utas.edu.au/mcp"
-    exclude-result-prefixes="mcp"
-    version="2.0">
-    
+                xmlns:gco="http://www.isotc211.org/2005/gco"
+                xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                xmlns:mcp="http://bluenet3.antcrc.utas.edu.au/mcp"
+                exclude-result-prefixes="mcp"
+                version="2.0">
+
     <!-- url substitutions to be performed -->
 
     <xsl:variable name="urlSubstitutions">
@@ -41,4 +41,34 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:param name="shape-file-online-resource">
+        <gmd:onLine>
+            <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                    <gmd:URL>http://geoserver-systest.aodn.org.au/geoserver/imos/ows?typeName=imos:soop_auscpr_zoop_trajectory_map&amp;outputFormat=SHAPE-ZIP</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                    <gco:CharacterString>OGC:WFS-1.0.0-http-get-feature--shapefile</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name>
+                    <gco:CharacterString>SHAPE-ZIP</gco:CharacterString>
+                </gmd:name>
+                <gmd:description>
+                    <gco:CharacterString>AusCPR Zooplankton</gco:CharacterString>
+                </gmd:description>
+            </gmd:CI_OnlineResource>
+        </gmd:onLine>
+
+    </xsl:param>
+
+    <xsl:variable name="expectedId" >c1344e70-480e-0993-e044-00144f7bc0f4</xsl:variable>
+
+    <xsl:template match="gmd:MD_DigitalTransferOptions">
+        <xsl:copy>
+            <xsl:copy-of select="@* | node()"/>
+            <xsl:if test="../../../../gmd:fileIdentifier/gco:CharacterString/text() = $expectedId">
+                <xsl:copy-of select="$shape-file-online-resource"/>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>
