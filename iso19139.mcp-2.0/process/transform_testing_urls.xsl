@@ -48,7 +48,7 @@
                     <gmd:URL>http://geoserver-systest.aodn.org.au/geoserver/imos/ows?typeName=imos:soop_auscpr_zoop_trajectory_map&amp;outputFormat=SHAPE-ZIP</gmd:URL>
                 </gmd:linkage>
                 <gmd:protocol>
-                    <gco:CharacterString>AODN:SHAPE-ZIP</gco:CharacterString>
+                    <gco:CharacterString>OGC:WFS-1.0.0-http-get-feature--shapefile</gco:CharacterString>
                 </gmd:protocol>
                 <gmd:name>
                     <gco:CharacterString>SHAPE-ZIP</gco:CharacterString>
