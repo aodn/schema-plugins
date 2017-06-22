@@ -40,5 +40,9 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
+	
+	<xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
+        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-123.aodn.org.au(:443)?/geoserver', 'https://tilecache-systest.aodn.org.au/geowebcache')"/></gmd:URL>
+    </xsl:template>
 
 </xsl:stylesheet>
