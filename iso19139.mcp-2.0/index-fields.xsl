@@ -459,6 +459,7 @@
 				<!-- ignore WMS links without protocol (are indexed below with mimetype application/vnd.ogc.wms_xml) -->
 				<xsl:if test="not($wmsLinkNoProtocol)">
 					<Field name="link" string="{concat($title, '|', $desc, '|', $linkage, '|', $protocol, '|', $mimetype)}" store="true" index="false"/>
+					<Field name="layer" string="{$title}" store="false" index="true"/>
 				</xsl:if>
 
 				<!-- Add KML link if WMS -->

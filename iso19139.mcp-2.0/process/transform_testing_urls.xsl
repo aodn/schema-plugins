@@ -8,7 +8,7 @@
     <!-- url substitutions to be performed -->
 
     <xsl:variable name="urlSubstitutions">
-        <substitution match="https?://geoserver-portal-internal.aodn.org.au(:443)?" replaceWith="http://geoserver-systest.aodn.org.au"/>
+        <substitution match="https?://geoserver-portal-internal.aodn.org.au(:443)?" replaceWith="http://geoserver-systest-internal.aodn.org.au"/>
         <substitution match="https?://geoserver-wps.aodn.org.au(:443)?" replaceWith="http://geoserver-wps-systest.aodn.org.au"/>
         <substitution match="https?://thredds.aodn.org.au(:443)?" replaceWith="http://thredds-systest.aodn.org.au"/>
     </xsl:variable>
@@ -42,7 +42,7 @@
     </xsl:template>
 	
 	<xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
-        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-portal-internal.aodn.org.au(:443)?/geoserver', 'https://tilecache-systest.aodn.org.au/geowebcache/service')"/></gmd:URL>
-    </xsl:template>																				 
+        <gmd:URL><xsl:value-of select="replace(.,'https?://tilecache.aodn.org.au(:443)?', 'https://tilecache-systest.aodn.org.au')"/></gmd:URL>
+    </xsl:template>
 
 </xsl:stylesheet>
