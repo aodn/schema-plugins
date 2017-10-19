@@ -1,15 +1,14 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:gco="http://www.isotc211.org/2005/gco"
-                xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:mcp="http://bluenet3.antcrc.utas.edu.au/mcp"
-                xmlns:geonet="http://www.fao.org/geonetwork"
-                version="2.0">
+    xmlns:gco="http://www.isotc211.org/2005/gco"
+    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:mcp="http://bluenet3.antcrc.utas.edu.au/mcp"
+    xmlns:geonet="http://www.fao.org/geonetwork"
+    version="2.0">
 
     <xsl:param name="pattern"/>
     <xsl:param name="replacement"/>
 
     <!-- default action is to copy -->
-
     <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
@@ -29,14 +28,14 @@
         <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), 'https://tilecache.aodn.org.au/geowebcache/service')"/></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource[gmd:linkage/gmd:URL/text() = $replacement]/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']">
+    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']">
 
         <xsl:variable name="collection_name"
-                      select="gmd:CI_OnlineResource/gmd:protocol/*/text()"/>
+                      select="gmd:CI_OnlineResource/gmd:name/*/text()"/>
         <gmd:onLine>
             <gmd:CI_OnlineResource>
                 <gmd:linkage>
-                    <gmd:URL><xsl:value-of select="$pattern"/></gmd:URL>
+                    <gmd:URL><xsl:value-of select="$pattern"/>/geoserver/ows</gmd:URL>
                 </gmd:linkage>
                 <gmd:protocol>
                     <gco:CharacterString>
