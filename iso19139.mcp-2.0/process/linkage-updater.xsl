@@ -3,6 +3,7 @@
     xmlns:gmd="http://www.isotc211.org/2005/gmd"
     xmlns:mcp="http://bluenet3.antcrc.utas.edu.au/mcp"
     xmlns:geonet="http://www.fao.org/geonetwork"
+    exclude-result-prefixes="mcp geonet"
     version="2.0">
 
     <xsl:param name="pattern"/>
@@ -24,11 +25,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']" priority="3">
         <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), 'https://tilecache.aodn.org.au/geowebcache/service')"/></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']">
+    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource[contains(gmd:linkage/gmd:URL/text(), $replacement)]/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']" priority="4">
 
         <xsl:variable name="collection_name"
                       select="gmd:CI_OnlineResource/gmd:name/*/text()"/>
