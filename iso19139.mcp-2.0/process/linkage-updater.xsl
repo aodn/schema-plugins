@@ -17,7 +17,7 @@
     </xsl:template>
 
     <!-- Always remove geonet:* elements. -->
-    <xsl:template match="geonet:*" priority="2"/>
+    <xsl:template match="geonet:*"/>
 
     <xsl:template match="gmd:URL[normalize-space($pattern) != '' and matches(text(), $pattern)]">
         <xsl:copy>
@@ -25,11 +25,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']" priority="3">
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
         <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), 'https://tilecache.aodn.org.au/geowebcache/service')"/></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource[contains(gmd:linkage/gmd:URL/text(), $replacement)]/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']" priority="4">
+    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource[contains(gmd:linkage/gmd:URL/text(), $pattern)]/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']">
 
         <xsl:variable name="collection_name"
                       select="gmd:CI_OnlineResource/gmd:name/*/text()"/>
