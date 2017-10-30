@@ -42,7 +42,7 @@
     </xsl:template>
 	
 	<xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
-        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-123.aodn.org.au(:443)?/geoserver', 'https://tilecache-sandbox.aodn.org.au/geowebcache/service')"/></gmd:URL>
+        <gmd:URL><xsl:value-of select="replace(.,'https?://tilecache.aodn.org.au(:443)?', 'https://tilecache-sandbox.aodn.org.au')"/></gmd:URL>
     </xsl:template>
 
 </xsl:stylesheet>
