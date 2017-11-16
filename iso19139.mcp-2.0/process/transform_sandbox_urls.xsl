@@ -9,7 +9,6 @@
 
     <xsl:variable name="urlSubstitutions">
         <substitution match="https?://geoserver-portal-internal.aodn.org.au(:443)?" replaceWith="http://geoserver-sandbox.aodn.org.au"/>
-        <substitution match="https?://geoserver-wps.aodn.org.au(:443)?/geoserver" replaceWith="https://wps-sandbox.dev.aodn.org.au"/>
         <substitution match="https?://thredds.aodn.org.au(:443)?" replaceWith="http://thredds-sandbox.aodn.org.au"/>
     </xsl:variable>
 
@@ -40,9 +39,17 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-	
-	<xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
+
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WPS--gogoduck']">
+        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-wps.aodn.org.au(:443)?/geoserver', 'https://wps-sandbox.aodn.org.au')"/></gmd:URL>
+    </xsl:template>
+
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
         <gmd:URL><xsl:value-of select="replace(.,'https?://tilecache.aodn.org.au(:443)?', 'https://tilecache-sandbox.aodn.org.au')"/></gmd:URL>
+    </xsl:template>
+
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WPS--netcdf-subset-service']">
+        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-wps.aodn.org.au(:443)?', 'http://geoserver-sandbox.aodn.org.au')"/></gmd:URL>
     </xsl:template>
 
 </xsl:stylesheet>
