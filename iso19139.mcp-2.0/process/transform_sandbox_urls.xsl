@@ -41,7 +41,7 @@
     </xsl:template>
 
     <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WPS--gogoduck']">
-        <gmd:URL><xsl:value-of select="replace(.,'https?://geoserver-wps.aodn.org.au(:443)?/geoserver', 'https://wps-sandbox.aodn.org.au')"/></gmd:URL>
+        <gmd:URL><xsl:value-of select="replace(.,'https?://processes.aodn.org.au', 'https://wps-sandbox.dev.aodn.org.au')"/></gmd:URL>
     </xsl:template>
 
     <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
