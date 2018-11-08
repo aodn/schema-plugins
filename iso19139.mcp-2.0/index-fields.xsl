@@ -216,6 +216,7 @@
 
 			<xsl:for-each select="*/gmd:MD_Keywords">
 				<xsl:variable name="thesaurusId" select="normalize-space(gmd:thesaurusName/*/gmd:identifier/*/gmd:code[starts-with(string(gmx:Anchor),'geonetwork.thesaurus')])"/>
+				<xsl:variable name="thesaurusTitle" select="normalize-space(gmd:thesaurusName/*/gmd:title/*)"/>
 
 				<xsl:if test="$thesaurusId!=''">
 					<Field name="thesaurusName" string="{string($thesaurusId)}" store="true" index="true"/>
@@ -228,6 +229,12 @@
 				<xsl:for-each select="gmd:keyword/*">
 					<Field name="keyword" string="{string(.)}" store="true" index="true"/>
 					<Field name="subject" string="{string(.)}" store="true" index="true"/>
+
+					<!-- index IMOS keywords as organisation units for the moment -->
+
+					<xsl:if test="$thesaurusTitle='IMOS Keywords Thesaurus'">
+						<Field name="orgUnit" string="{string(.)}" store="true" index="true"/>
+					</xsl:if>
 
 					<!-- index keyword codes under lucene index field with name same
 					     as thesaurus that contains the keyword codes -->
@@ -263,6 +270,13 @@
 
 			<xsl:for-each-group select="$pointOfContactOrganisations|$responsiblePartyOrganisations" group-by=".">
 				<Field name="orgName" string="{string(current-grouping-key())}" store="true" index="true"/>
+
+				<xsl:if test="not(matches(string(current-grouping-key()),'IMOS'))">
+					<!-- Source all non-IMOS organisational unit details from point of contact/responsible party elements -->
+					<!-- IMOS organisational units are sourced from keywords -->
+					<Field name="orgUnit" string="{string(current-grouping-key())}" store="true" index="true"/>
+				</xsl:if>
+
 				<Field name="organisation" string="{string(current-grouping-key())}" store="true" index="true"/>
 			</xsl:for-each-group>
 
