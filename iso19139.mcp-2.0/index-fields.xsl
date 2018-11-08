@@ -230,9 +230,9 @@
 					<Field name="keyword" string="{string(.)}" store="true" index="true"/>
 					<Field name="subject" string="{string(.)}" store="true" index="true"/>
 
-					<!-- index IMOS keywords as organisation units for the moment -->
+					<!-- index IMOS organisational units -->
 
-					<xsl:if test="$thesaurusTitle='IMOS Keywords Thesaurus'">
+					<xsl:if test="$thesaurusTitle='AODN Organisation Vocabulary'">
 						<Field name="orgUnit" string="{string(.)}" store="true" index="true"/>
 					</xsl:if>
 
