@@ -270,13 +270,7 @@
 
 			<xsl:for-each-group select="$pointOfContactOrganisations|$responsiblePartyOrganisations" group-by=".">
 				<Field name="orgName" string="{string(current-grouping-key())}" store="true" index="true"/>
-
-				<xsl:if test="not(matches(string(current-grouping-key()),'IMOS'))">
-					<!-- Source all non-IMOS organisational unit details from point of contact/responsible party elements -->
-					<!-- IMOS organisational units are sourced from keywords -->
-					<Field name="orgUnit" string="{string(current-grouping-key())}" store="true" index="true"/>
-				</xsl:if>
-
+				<Field name="orgUnit" string="{string(current-grouping-key())}" store="true" index="true"/>
 				<Field name="organisation" string="{string(current-grouping-key())}" store="true" index="true"/>
 			</xsl:for-each-group>
 
