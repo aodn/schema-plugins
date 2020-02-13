@@ -37,7 +37,7 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>http://geoserver-portal-internal.aodn.org.au/geoserver/wms</gmd:URL>
+                                <gmd:URL>http://geoserver-portal.aodn.org.au/geoserver/wms</gmd:URL>
                             </gmd:linkage>
                             <gmd:protocol>
                                 <gco:CharacterString>AODN:FILTERS--enabled</gco:CharacterString>

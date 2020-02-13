@@ -8,7 +8,7 @@
     <!-- url substitutions to be performed -->
 
     <xsl:variable name="urlSubstitutions">
-        <substitution match="https?://geoserver-portal-internal.aodn.org.au(:443)?" replaceWith="http://geoserver-sandbox-internal.aodn.org.au"/>
+        <substitution match="https?://geoserver-portal.aodn.org.au(:443)?" replaceWith="http://geoserver-sandbox.aodn.org.au"/>
         <substitution match="https?://thredds.aodn.org.au(:443)?" replaceWith="http://thredds-sandbox.aodn.org.au"/>
     </xsl:variable>
 
