@@ -26,11 +26,11 @@
     </xsl:template>
 
     <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']" priority="100">
-        <xsl:copy><xsl:value-of select="'https://tilecache.aodn.org.au/geowebcache/service'"/></xsl:copy>
+        <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), 'https://tilecache.aodn.org.au/geowebcache/service')"/></xsl:copy>
     </xsl:template>
 
     <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.3.0-http-get-map']" priority="100">
-        <xsl:copy><xsl:value-of select="'https://tilecache.aodn.org.au/geowebcache/service'"/></xsl:copy>
+        <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), 'https://tilecache.aodn.org.au/geowebcache/service')"/></xsl:copy>
     </xsl:template>
 
     <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WPS--gogoduck']">
