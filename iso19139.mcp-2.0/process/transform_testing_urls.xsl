@@ -44,7 +44,11 @@
         <gmd:URL><xsl:value-of select="replace(.,'https?://processes.aodn.org.au', 'https://processes-systest.aodn.org.au')"/></gmd:URL>
     </xsl:template>
 
-	<xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']">
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.1.1-http-get-map']" priority="100">
+        <gmd:URL><xsl:value-of select="replace(.,'https?://tilecache.aodn.org.au(:443)?', 'https://tilecache-systest.aodn.org.au')"/></gmd:URL>
+    </xsl:template>
+
+    <xsl:template match="gmd:URL[../../gmd:protocol/*/text()='OGC:WMS-1.3.0-http-get-map']" priority="100">
         <gmd:URL><xsl:value-of select="replace(.,'https?://tilecache.aodn.org.au(:443)?', 'https://tilecache-systest.aodn.org.au')"/></gmd:URL>
     </xsl:template>
 

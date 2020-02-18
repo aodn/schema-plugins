@@ -6,6 +6,7 @@
     exclude-result-prefixes="mcp geonet"
     version="2.0">
 
+    <xsl:preserve-space elements="*"/>
     <xsl:param name="pattern"/>
     <xsl:param name="replacement"/>
 
