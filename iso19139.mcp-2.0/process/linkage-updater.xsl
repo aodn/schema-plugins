@@ -40,7 +40,7 @@
         <gmd:onLine>
             <gmd:CI_OnlineResource>
                 <gmd:linkage>
-                    <gmd:URL>https://<xsl:value-of select="$pattern"/>/geoserver/ows</gmd:URL>
+                    <gmd:URL><xsl:value-of select="$pattern"/>/geoserver/ows</gmd:URL>
                 </gmd:linkage>
                 <gmd:protocol>
                     <gco:CharacterString>
