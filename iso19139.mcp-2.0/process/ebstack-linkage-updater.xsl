@@ -35,36 +35,4 @@
         <xsl:copy><xsl:value-of select="replace(., concat($pattern,'/geoserver'), $wms-url)"/></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="gmd:onLine[gmd:CI_OnlineResource[contains(gmd:linkage/gmd:URL/text(), $pattern)]/gmd:protocol/*/text() = 'OGC:WFS-1.0.0-http-get-capabilities']">
-
-        <xsl:variable name="collection_name"
-                      select="gmd:CI_OnlineResource/gmd:name/*/text()"/>
-        <gmd:onLine>
-            <gmd:CI_OnlineResource>
-                <gmd:linkage>
-                    <gmd:URL><xsl:value-of select="$pattern"/>/geoserver/ows</gmd:URL>
-                </gmd:linkage>
-                <gmd:protocol>
-                    <gco:CharacterString>
-                        <xsl:value-of select="'AODN:WFS-EXTERNAL-1.0.0-http-get-capabilities'"/>
-                    </gco:CharacterString>
-                </gmd:protocol>
-                <gmd:name>
-                    <gco:CharacterString>
-                        <xsl:value-of select="$collection_name"/>
-                    </gco:CharacterString>
-                </gmd:name>
-                <gmd:description>
-                    <gco:CharacterString>This OGC WFS service returns filtered geographic information. The returned data
-                        is available in multiple formats including CSV.
-                    </gco:CharacterString>
-                </gmd:description>
-            </gmd:CI_OnlineResource>
-        </gmd:onLine>
-
-        <xsl:copy>
-            <xsl:apply-templates select="@* | node()"/>
-        </xsl:copy>
-    </xsl:template>
-
 </xsl:stylesheet>
