@@ -35,7 +35,7 @@ pipeline {
                 stage('package') {
                     steps {
                         sh 'mkdir -p target'
-                        sh 'find . -maxdepth 1 -type d  ! -path . ! -path "*/\.*" ! -path ./target | sort | while read plugin; do echo $plugin; zip -r -q - $plugin >"target/${plugin}.zip"; done'
+                        sh 'find . -maxdepth 1 -type d  ! -path . ! -path "*/\\.*" ! -path ./target | sort | while read plugin; do zip -r -q - $plugin >"target/${plugin}.zip"; done'
                     }
                 }
             }
